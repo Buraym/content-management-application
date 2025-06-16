@@ -16,10 +16,10 @@ class ContactController extends Controller
         $contacts = Contact::all()->map(fn($contact) => [
                 $contact->id,
                 $contact->name,
-                $contact->contact,
+                preg_replace('/^(\d)(\d{4})(\d{4})$/', '$1 $2-$3', $contact->contact),
                 $contact->email,
-                $contact->created_at->format('d/m/y'),
-                $contact->created_at == null ? "--/--/----" : $contact->updated_at->format('d/m/y')
+                $contact->created_at->format('d/m/y H:i:s'),
+                $contact->created_at == null ? "--/--/----" : $contact->updated_at->format('d/m/y H:i:s')
             ])->toArray();
 
         return view('list', [
