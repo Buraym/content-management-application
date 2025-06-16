@@ -31,41 +31,41 @@
                                 @endif
                             </td>
                         @endforeach
-                        @auth
-                            <td class="max-h-12 @php
+                        <td class="max-h-12 @php
+                            if ($indexRow == count($rows) - 1) {
+                                echo " rounded-br-lg";
+                            }
+                        @endphp border-none text-right pr-3">
+                            @auth
+                            <div class="@php
                                 if ($indexRow == count($rows) - 1) {
                                     echo " rounded-br-lg";
                                 }
-                            @endphp border-none text-right pr-3">
-                                <div class="@php
-                                    if ($indexRow == count($rows) - 1) {
-                                        echo " rounded-br-lg";
-                                    }
-                                @endphp flex justify-end">
-                                    @if ($deleteLink != "") 
-                                        <form method="POST" action="{{ route($deleteLink, $row[0]) }}" class="bg-none p-3">
-                                            @csrf
-                                            @method('DELETE')
-                                                <x-danger-button class="text-white w-12 rounded-lg">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
-                                                        <path d="M3 6h18"/>
-                                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-                                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-                                                    </svg>
-                                                </x-danger-button>
-                                        </form>
-                                    @endif
-                                    @if (isset($row[0]) && $link != "")
-                                        <a href="{{ route($link, ['id' => $row[0]]) }}" class="inline-flex items-center px-2  my-auto h-9 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150"wire:navigate.hover>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right">
-                                                <path d="M7 7h10v10"/>
-                                                <path d="M7 17 17 7"/>
-                                            </svg>
-                                        </a>
-                                    @endif
-                                </div>
-                            </td>
-                        @endauth
+                            @endphp flex justify-end">
+                                @if ($deleteLink != "") 
+                                    <form method="POST" action="{{ route($deleteLink, $row[0]) }}" class="bg-none p-3">
+                                        @csrf
+                                        @method('DELETE')
+                                            <x-danger-button class="text-white w-12 rounded-lg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
+                                                    <path d="M3 6h18"/>
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                                                </svg>
+                                            </x-danger-button>
+                                    </form>
+                                @endif
+                                @if (isset($row[0]) && $link != "")
+                                    <a href="{{ route($link, ['id' => $row[0]]) }}" class="inline-flex items-center px-2  my-auto h-9 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150"wire:navigate.hover>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                                            <path d="M7 7h10v10"/>
+                                            <path d="M7 17 17 7"/>
+                                        </svg>
+                                    </a>
+                                @endif
+                            </div>
+                            @endauth
+                        </td>
                     </tr>
                 @endforeach
             @else

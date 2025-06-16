@@ -6,15 +6,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ContactController::class, 'index'])->name("contact.list");
 
-Route::get('/contact/create', [ContactController::class, 'create'])->name("contact.create");
-
-Route::get('/contact/{id}', function () {
-    return view('list');
-})->name("contact.show");
-
-Route::get('/contact/{id}/edit', function () {
-    return view('list');
-})->name("contact.edit");
+Route::prefix("/contact")->group(function(){
+    Route::get('/create', [ContactController::class, 'create'])->name("contact.create");
+    Route::get('/{id}', [ContactController::class, 'show'])->name("contact.show");
+    Route::get('/{id}/edit', [ContactController::class, 'edit'])->name("contact.edit");
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

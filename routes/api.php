@@ -8,6 +8,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/contact/store', [ContactController::class, 'store'])->name("contact.store");
+Route::prefix('/contact')->group(function(){
+    Route::post('/store', [ContactController::class, 'store'])->name("contact.store");
+    Route::put('/{id}/edit', [ContactController::class, 'update'])->name("contact.update");
+    Route::delete('/destroy', [ContactController::class, 'destroy'])->name("contact.destroy");
+});
 
-Route::delete('/contact/destroy', [ContactController::class, 'destroy'])->name("contact.destroy");
+
