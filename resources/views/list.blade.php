@@ -4,17 +4,19 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-none">
                 Lista de contatos
             </h2>
-            <a
-                href="{{ route('contact.create') }}"
-                class="inline-block px-2 py-1.5 dark:text-[#ef2d56] text-[#1b1b18] border border-transparent transition-all rounded-full text-sm leading-normal"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-plus-icon lucide-user-round-plus">
-                    <path d="M2 21a8 8 0 0 1 13.292-6"/>
-                    <circle cx="10" cy="8" r="5"/>
-                    <path d="M19 16v6"/>
-                    <path d="M22 19h-6"/>
-                </svg>
-            </a>
+            @auth
+                <a
+                    href="{{ route('contact.create') }}"
+                    class="inline-block px-2 py-1.5 dark:text-[#ef2d56] text-[#1b1b18] border border-transparent transition-all rounded-full text-sm leading-normal"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-plus-icon lucide-user-round-plus">
+                        <path d="M2 21a8 8 0 0 1 13.292-6"/>
+                        <circle cx="10" cy="8" r="5"/>
+                        <path d="M19 16v6"/>
+                        <path d="M22 19h-6"/>
+                    </svg>
+                </a>
+            @endauth
         </div>
         
     </x-slot>
