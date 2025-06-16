@@ -13,8 +13,13 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::all();
-        return view('welcome', [
-            "contacts" => $contacts
+        return view('list', [
+            "rows" => $contacts,
+            "columns" => [
+                "ID", "Nome", "Contato", "Email", "Criado em", "Atualizado em"
+            ],
+            "link" => "contact.show",
+            "deleteLink" => "contact.destroy"
         ]);
     }
 
