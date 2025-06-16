@@ -11,19 +11,17 @@ class DataTable extends Component
     public $columns = [];
     public $rows = [];
     public $link = "";
-    public $downloadRoute = "";
     public $deleteLink = "";
     public $authenticated = false;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($columns = [], $rows = [], $link = "", $downloadRoute = "", $deleteLink = "", $authenticated = false)
+    public function __construct($columns = [], $rows = [], $link = "", $deleteLink = "", $authenticated = false)
     {
         $this->columns = $columns;
         $this->rows = $rows;
         $this->link = $link;
-        $this->downloadRoute = $downloadRoute;
         $this->deleteLink = $deleteLink;
         $this->authenticated = $authenticated;
     }

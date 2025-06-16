@@ -42,19 +42,6 @@
                                         echo " rounded-br-lg";
                                     }
                                 @endphp flex justify-end">
-                                    @if ($downloadRoute != "") 
-                                        <form method="POST" action="{{ route($downloadRoute, $row[0]) }}" class="bg-none p-3">
-                                            @csrf
-                                                <x-primary-button class="text-white w-12 rounded-lg">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-down">
-                                                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
-                                                        <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
-                                                        <path d="M12 18v-6"/>
-                                                        <path d="m9 15 3 3 3-3"/>
-                                                    </svg>
-                                                </x-primary-button>
-                                        </form>
-                                    @endif
                                     @if ($deleteLink != "") 
                                         <form method="POST" action="{{ route($deleteLink, $row[0]) }}" class="bg-none p-3">
                                             @csrf

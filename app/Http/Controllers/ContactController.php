@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactStoreRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,15 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::all()->map(fn($contact) => [
+                $contact->id,
+                $contact->name,
+                $contact->contact,
+                $contact->email,
+                $contact->created_at->format('d/m/y'),
+                $contact->created_at == null ? "--/--/----" : $contact->updated_at->format('d/m/y')
+            ])->toArray();
+
         return view('list', [
             "rows" => $contacts,
             "columns" => [
@@ -28,15 +37,18 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view("create-contact");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ContactStoreRequest $request)
     {
-        //
+        // dd($request);
+        $validatedRequest = $request->validated();
+        Contact::create($validatedRequest);
+        return redirect()->route("contact.list");
     }
 
     /**
@@ -68,6 +80,11 @@ class ContactController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $contact = Contact::find($id);
+        if ($contact === null) {
+            return redirect()->route("contact.list", ['error' => "Contato não encontrado !"]);
+        }
+        $contact->delete();
+        return redirect()->route("contact.list", ["message" => "Contato removido com sucesso !"]);
     }
 }
