@@ -11,7 +11,7 @@ Route::get('/user', function (Request $request) {
 Route::prefix('/contact')->group(function(){
     Route::post('/store', [ContactController::class, 'store'])->name("contact.store");
     Route::put('/{id}/edit', [ContactController::class, 'update'])->name("contact.update");
-    Route::delete('/destroy', [ContactController::class, 'destroy'])->name("contact.destroy");
+    Route::delete('/{id}/destroy', [ContactController::class, 'destroy'])->name("contact.destroy");
 });
 
 

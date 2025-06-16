@@ -43,7 +43,7 @@
                                 }
                             @endphp flex justify-end">
                                 @if ($deleteLink != "") 
-                                    <form method="POST" action="{{ route($deleteLink, $row[0]) }}" class="bg-none p-3">
+                                    <form method="POST" action="{{ route($deleteLink, ["id" => $row[0]]) }}" class="bg-none p-3">
                                         @csrf
                                         @method('DELETE')
                                             <x-danger-button class="text-white w-12 rounded-lg">
