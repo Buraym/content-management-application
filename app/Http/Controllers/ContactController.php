@@ -19,7 +19,7 @@ class ContactController extends Controller
                 preg_replace('/^(\d)(\d{4})(\d{4})$/', '$1 $2-$3', $contact->contact),
                 $contact->email,
                 $contact->created_at->format('d/m/y H:i:s'),
-                $contact->created_at == null ? "--/--/----" : $contact->updated_at->format('d/m/y H:i:s')
+                $contact->updated_at == null ? "--/--/----" : $contact->updated_at->format('d/m/y H:i:s')
             ])->toArray();
 
         return view('list', [
@@ -56,7 +56,18 @@ class ContactController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $contact = Contact::find($id);
+        if ($contact === null) {
+            return redirect()->route("contact.list", ['error' => "Contato não encontrado !"]);
+        }
+        return view('show-contact', [
+            "id" => $contact->id,
+            "contact_name" => $contact->name,
+            "contact_email" => $contact->email,
+            "contact_contact" => preg_replace('/^(\d)(\d{4})(\d{4})$/', '$1 $2-$3', $contact->contact),
+            "contact_created" => $contact->created_at->format('d/m/y H:i:s'),
+            "contact_updated" => $contact->updated_at == null ? "--/--/----" : $contact->updated_at->format('d/m/y H:i:s')
+        ]);
     }
 
     /**
@@ -64,7 +75,18 @@ class ContactController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $contact = Contact::find($id);
+        if ($contact === null) {
+            return redirect()->route("contact.list", ['error' => "Contato não encontrado !"]);
+        }
+        return view('edit-contact', [
+            "id" => $contact->id,
+            "contact_name" => $contact->name,
+            "contact_email" => $contact->email,
+            "contact_contact" => preg_replace('/^(\d)(\d{4})(\d{4})$/', '$1 $2-$3', $contact->contact),
+            "contact_created" => $contact->created_at->format('d/m/y H:i:s'),
+            "contact_updated" => $contact->updated_at == null ? "--/--/----" : $contact->updated_at->format('d/m/y H:i:s')
+        ]);
     }
 
     /**
