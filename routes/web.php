@@ -6,15 +6,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ContactController::class, 'index'])->name("contact.list");
 
-Route::get('/contact/:id', function () {
+Route::get('/contact/create', [ContactController::class, 'create'])->name("contact.create");
+
+Route::get('/contact/{id}', function () {
     return view('list');
 })->name("contact.show");
 
-Route::get('/contact/:id/edit', function () {
-    return view('list');
-})->name("contact.edit");
-
-Route::get('/contact/:id/delete', function () {
+Route::get('/contact/{id}/edit', function () {
     return view('list');
 })->name("contact.edit");
 
