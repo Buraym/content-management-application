@@ -11,7 +11,7 @@
                 </svg>
             </a>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Registro de contato
+                Edição do contato de "{{ $contact_name }}""
             </h2>
         </div>
         
@@ -20,8 +20,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-2 sm:p-4 bg-transparent sm:rounded-lg flex justify-between items-center">
-                <form method="POST" action="{{ route("contact.store") }}" class="flex flex-col gap-2">
+                <form method="POST" action="{{ route("contact.update", ["id" => $id]) }}" class="flex flex-col gap-2">
                     @csrf
+                    @method('PUT')
                         <x-input-label for="name" value="Nome completo" class="sr-only" />
                         <x-text-input
                             wire:model="name"
@@ -29,7 +30,8 @@
                             name="name"
                             type="text"
                             class="block w-full"
-                            placeholder="Nome completo"
+                            placeholder="Novo nome completo"
+                            :value="$contact_name"
                         />
                         <p class="mb-2 text-sm text-gray-600 dark:text-[#EF2D56]">
                             *Campo necessário
@@ -41,7 +43,8 @@
                             name="email"
                             type="email"
                             class="block w-full"
-                            placeholder="Email"
+                            placeholder="Novo email"
+                            :value="$contact_email"
                         />
                         <p class="mb-2 text-sm text-gray-600 dark:text-[#EF2D56]">
                             *Campo necessário, deve ser válido e único
@@ -53,13 +56,14 @@
                             name="contact"
                             type="text"
                             class="block w-full"
-                            placeholder="Contato ( xxxxxxxxx )"
+                            placeholder="Novo contato ( xxxxxxxxx )"
+                            :value="$contact_contact"
                         />
                         <p class="mb-2 text-sm text-gray-600 dark:text-[#EF2D56]">
                             *Campo necessário, deve ser válido e único
                         </p>
                         <x-primary-button class="max-w-36 border dark:border-[#EF2D56] dark:bg-transparent dark:text-[#EF2D56] dark:hover:bg-[#EF2D56] dark:hover:text-white transition-all flex justify-center text-center">
-                            Registrar
+                            Atualizar
                         </x-danger-button>
                 </form>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactStoreRequest;
 use App\Models\Contact;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -83,7 +84,7 @@ class ContactController extends Controller
             "id" => $contact->id,
             "contact_name" => $contact->name,
             "contact_email" => $contact->email,
-            "contact_contact" => preg_replace('/^(\d)(\d{4})(\d{4})$/', '$1 $2-$3', $contact->contact),
+            "contact_contact" => $contact->contact,
             "contact_created" => $contact->created_at->format('d/m/y H:i:s'),
             "contact_updated" => $contact->updated_at == null ? "--/--/----" : $contact->updated_at->format('d/m/y H:i:s')
         ]);
@@ -94,7 +95,17 @@ class ContactController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $contact = Contact::find($id);
+        if ($contact === null) {
+            return redirect()->route("contact.list", ['error' => "Contato não encontrado !"]);
+        }
+        $validatedData = $request->validateWithBag('contact', [
+            'name' => 'required|min:5',
+            'email' => 'required|email|unique:contacts,email,'.$id,
+            'contact' => ['required', 'unique:contacts,contact,'.$id, 'regex:/^\d{9}$/']
+        ]);
+        $contact->update($validatedData);
+        return redirect()->route("contact.list", ['message' => 'Contato atualizado com sucesso!']);
     }
 
     /**
